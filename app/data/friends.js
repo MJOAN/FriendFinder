@@ -2,7 +2,7 @@
 // DATA
 // ===============================================================================
 
-var friend = [
+var friends = [
 
 {
   "name":"Ahmed",
@@ -21,4 +21,7 @@ var friend = [
     ]
 }
 
-module.exports = friend;
+
+
+
+module.exports = friends;
