@@ -61,7 +61,7 @@ module.exports = function(app) {
     var arrayResult = subtractArrays(userArray, friendArray);   
 
     for (var i = 0; i < arrayResult.length; i++) {
-        difference = totalDifference- arrayResult[i];   // 10 questions max * 5 highest rank === 50 
+        difference = totalDifference - arrayResult[i];   // 10 questions max * 5 highest rank === 50 
         console.log(difference);  
     }
 
