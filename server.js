@@ -30,8 +30,7 @@ app.use(bodyParser.json());
 
 require("./routing/apiRoutes")(app);
 require("./routing/htmlRoutes")(app);
-require("./public/survey")(app);
-require("./app/data/friends")(app);
+
 // =============================================================================
 // LISTENER
 // The below code effectively "starts" our server
