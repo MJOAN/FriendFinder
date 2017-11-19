@@ -197,9 +197,9 @@
 
 
             $.post("/api/friends", $.param('userData' , true), function(data) {
-                $("#match-result").text(data.name);
-                $('#match-img').attr("src", data.photo);
-                $("#match-modal").modal('toggle');
+                $("#matchResult").text(data.name);
+                $('#matchImg').attr("src", data.photo);
+                $("#matchModal").modal('toggle');
                 console.log('user = ' + JSON.stringify(userData));
             });
         } else {
