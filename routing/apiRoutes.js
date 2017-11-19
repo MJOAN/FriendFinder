@@ -33,7 +33,7 @@ module.exports = function(app) {
     var totalDifference = 50;
 
     var user = req.body;
-    var scores = user[0].scores;
+    var scores = user.scores;
     console.log(scores);
 
     var matchName = "";
