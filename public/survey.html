@@ -133,7 +133,7 @@
         <hr>
         <footer class="footer">
             <div class="container">
-                <p><a href="/api/friends">API Friends List</a> | <a href="hhttps://github.com/MJOAN/FriendFinder">GitHub Repo</a></p>
+                <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/MJOAN/FriendFinder">GitHub Repo</a></p>
             </div>
         </footer>
     </div>
@@ -184,6 +184,7 @@
         }
 
         if (validateForm() == true) {
+            
             var userData = {
                 name: $("#name").val().trim(),
                 photo: $("#photo").val(),
@@ -194,14 +195,20 @@
                     $("#q10").val()
                 ]
             }
+            
+            console.log('user = ' + JSON.stringify(userData));
 
+            var URL = window.location.origin;
 
-            $.post("/api/friends", $.param('userData' , true), function(data) {
+            $.post(URL + "/api/friends", userData, function(data) {
+
+                console.log('response = ' + JSON.stringify(data));
+
                 $("#matchResult").text(data.name);
                 $('#matchImg').attr("src", data.photo);
                 $("#matchModal").modal('toggle');
-                console.log('user = ' + JSON.stringify(userData));
             });
+
         } else {
 
             alert("Please fill out all fields before submitting!");
@@ -209,6 +216,7 @@
 
         return false;
     });
+
 
 
     </script>

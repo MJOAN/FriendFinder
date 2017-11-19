@@ -4,8 +4,8 @@
 // These data sources hold arrays of information on friends, matches and user
 // ===============================================================================
 
-var friends = require("..app/data/friends");
-
+var friends = require("../app/data/friends");
+var path = require('path');
 // ===============================================================================
 // ROUTING
 // ===============================================================================
@@ -20,16 +20,16 @@ module.exports = function(app) {
 
   app.get("/api/friends", function(req, res) {
     res.json(friends);
-    console.log("User Data: " + JSON.stringify(friends);
+    console.log("User Data: " + JSON.stringify(friends));
   });
 
 
-  app.post("/survey", function(req, res) {  // redirect to successful match in matchModal
+  app.post("/api/friends", function(req, res) {  // redirect to successful match in matchModal
     
     console.log(req.body);
     console.log("User Data: " + userData);
 
-    var difference;
+    var difference = 0;
     var totalDifference = 50;
 
     var user = req.body;
@@ -39,16 +39,16 @@ module.exports = function(app) {
     var matchName = "";
     var matchPhoto = "";
 
-    var friends = []; 
-
     var userArray = [];
     var friendArray = [];
+    var arrayResult;
 
     // loop through friends and user scores length store in array variable
     for (var i = 0; i < friends.length;i++) {
-      for (var j = 0; scores.length; j++ ) {    
         friendArray = friends[i].scores;    
-        userArray = scores[j];
+
+         for (var j = 0; scores.length; j++ ) {    
+            userArray = scores[j];
     } 
 
   
@@ -58,7 +58,7 @@ module.exports = function(app) {
         });
     }   
 
-    var arrayResult = subtractArrays(userArray, friendArray);   
+    arrayResult = subtractArrays(userArray, friendArray);   
 
     for (var i = 0; i < arrayResult.length; i++) {
         difference = totalDifference - arrayResult[i];   // 10 questions max * 5 highest rank === 50 
@@ -69,7 +69,7 @@ module.exports = function(app) {
       matchName = friends[i].name;
       matchPhoto = friends[i].photo; 
       }
-    
+      console.log(matchName);
     }  // end friends[i] loop
 
     friends.push(user);
@@ -79,6 +79,8 @@ module.exports = function(app) {
     console.log({ matchResult: matchName, matchPhoto: matchPhoto });
 
   });
+
+
 };
 
 
