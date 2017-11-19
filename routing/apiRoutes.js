@@ -75,8 +75,8 @@ module.exports = function(app) {
     friends.push(user);
 
     // Send back the name and photo of the new match result
-    res.json({ matchResult: matchName, matchImg: friends[i].photo });
-    console.log({ matchResult: matchName, matchImg: friends[i].photo });
+    res.json({ matchResult: matchName, matchPhoto: matchPhoto  });
+    console.log({ matchResult: matchName, matchPhoto: matchPhoto });
 
   });
 };
