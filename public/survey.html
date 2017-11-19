@@ -184,7 +184,7 @@
         }
 
         if (validateForm() == true) {
-            var userJSON = {
+            var userData = {
                 name: $("#name").val().trim(),
                 photo: $("#photo").val(),
                 scores: [
@@ -196,11 +196,11 @@
             }
 
 
-            $.post("/api/friends", $.param('userJSON' , true), function(data) {
+            $.post("/api/friends", $.param('userData' , true), function(data) {
                 $("#match-result").text(data.name);
                 $('#match-img').attr("src", data.photo);
                 $("#match-modal").modal('toggle');
-                console.log('user = ' + JSON.stringify(userJSON));
+                console.log('user = ' + JSON.stringify(userData));
             });
         } else {
 

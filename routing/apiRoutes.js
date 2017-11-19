@@ -27,64 +27,56 @@ module.exports = function(app) {
   app.post("/survey", function(req, res) {  // redirect to successful match in matchModal
     
     console.log(req.body);
-    console.log("User Data: " + 
+    console.log("User Data: " + userData);
 
-    var user = req.body.user;
-    var friends = [];  // is this how i reference ???
+    var difference;
+    var totalDifference = 50;
+
+    var user = req.body;
+    var scores = user[0].scores;
+    console.log(scores);
+
+    var matchName = "";
+    var matchPhoto = "";
+
+    var friends = []; 
 
     var userArray = [];
     var friendArray = [];
 
-    var scores = req.body.user[0].scores;
-    var matchName = req.body.user.name;
-    var matchPhoto = req.body.user.photo;
-    
-    var difference;
-    var totalDifference = 0;
+    // loop through friends and user scores length store in array variable
+    for (var i = 0; i < friends.length;i++) {
+      for (var j = 0; scores.length; j++ ) {    
+        friendArray = friends[i].scores;    
+        userArray = scores[j];
+    } 
 
-
-    for (scores in user) {   // using a for in  --- > not a for loop is that OK?! 
-    userArray = user.scores;
-    }
-
-/// get JSON from friends file
-    function getArray(){
-    return $.getJSON('/app/data/friends.js');
-    }
-    getArray().done(function(data) {
-///    
-
-    for (scores in friends) {  // have to loop through ALL JSON objects in friends.js file!! 
-      friendArray = friends.scores;
-    }
   
-    function subtractArrays (userArray, friendArray) {     // run subtratArrays for every possible friend 
+    function subtractArrays (userArray, friendArray) {     
         return arr2.map(function (el, i) {
         return Math.abs(el - userArray[i]);
         });
     }   
 
-    subtractArrays(userArray, friendArray);    // [1, 2. 0, 0, 0, 3, 2, 0 , 1] for example
-
-    var arrayResult = subtractArrays();
+    var arrayResult = subtractArrays(userArray, friendArray);   
 
     for (var i = 0; i < arrayResult.length; i++) {
-        difference = 50 - arrayResult[i];
-        totalDifference = difference;
+        difference = totalDifference- arrayResult[i];   // 10 questions max * 5 highest rank === 50 
+        console.log(difference);  
     }
 
-    return totalDifference;    // set totalDifference variable to lowest number
+    if (difference < totalDifference) {
+      matchName = friends[i].name;
+      matchPhoto = friends[i].photo; 
+      }
+    
+    }  // end friends[i] loop
 
-    res.redirect("/");
+    friends.push(user);
 
-
-  app.post("/api/clear", function() {
-    // Empty out the arrays of data
-    friends = [];
-    user = [];
-
-    console.log("Clearing!");
-    res.redirect("/");
+    // Send back the name and photo of the new match result
+    res.json({ matchResult: matchName, matchImg: friends[i].photo });
+    console.log({ matchResult: matchName, matchImg: friends[i].photo });
 
   });
 };
