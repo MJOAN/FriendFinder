@@ -5,7 +5,6 @@
 // ===============================================================================
 
 var friends = require("../app/data/friends");
-var path = require('path');
 // ===============================================================================
 // ROUTING
 // ===============================================================================
@@ -24,63 +23,73 @@ module.exports = function(app) {
   });
 
 
-  app.post("/api/friends", function(req, res) {  // redirect to successful match in matchModal
+  app.post("/api/friends", function(req, res) {  
+    // redirect to successful match in modal
+    // We will use this object to hold the "best match". We will constantly update it as we
+    // loop through all of the options
     
-    console.log(req.body);
-    console.log("User Data: " + userData);
+    var bestMatch = {
+      name: "",
+      photo: "",
+      friendDifference: 1000
+    };
+
 
     var difference = 0;
-    var totalDifference = 50;
-
     var user = req.body;
     var scores = user.scores;
-    console.log(scores);
 
-    var matchName = "";
-    var matchPhoto = "";
+    console.log("req.body", req.body);
+    console.log("Scores: " + scores);
+    console.log("User Name: " + user.name);  // nothing here - object Object
 
-    var userArray = [];
-    var friendArray = [];
-    var arrayResult;
+    var userScore = [];
+    var friendScore = [];
 
-    // loop through friends and user scores length store in array variable
-    for (var i = 0; i < friends.length;i++) {
-        friendArray = friends[i].scores;    
+    // loop through friends.json file and user scores length store in array variable
+    for (var i = 0; i < friends.length; i++) {
+        var friendName = friends[i];    
 
-         for (var j = 0; scores.length; j++ ) {    
-            userArray = scores[j];
-    } 
+        console.log("userFriend", friendName.name);  // should be user name
 
+         for (var j = 0; j < friendName.scores.length; j++ ) {  
+            friendScore = friendName.scores[j];  
+            userScore = scores[j];
+
+            difference += Math.abs(parseInt(userScore) - parseInt(friendScore));
+        } 
+
+      console.log("friendScores", friendScore);  // should be user scores
+      console.log("userScores", userScore);
   
-    function subtractArrays (userArray, friendArray) {     
+/*    function subtractArrays (userArray, friendArray) {     
         return arr2.map(function (el, i) {
         return Math.abs(el - userArray[i]);
         });
-    }   
+        arrayRedifsult = subtractArrays(userArray, friendArray);   
+    }  
 
-    arrayResult = subtractArrays(userArray, friendArray);   
-
-    for (var i = 0; i < arrayResult.length; i++) {
+      for (var i = 0; i < arrayResult.length; i++) {
         difference = totalDifference - arrayResult[i];   // 10 questions max * 5 highest rank === 50 
         console.log(difference);  
     }
-
-    if (difference < totalDifference) {
-      matchName = friends[i].name;
-      matchPhoto = friends[i].photo; 
+*/
+    
+    if (difference <= bestMatch.friendDifference) {
+      bestMatch.name = friendName.name;
+      bestMatch.photo = friendName.photo; 
+      bestMatch.friendDifference = difference;
       }
-      console.log(matchName);
-    }  // end friends[i] loop
+    } 
+
+    console.log("score difference, best match", difference, bestMatch);
+    console.log(bestMatch);
 
     friends.push(user);
-
     // Send back the name and photo of the new match result
-    res.json({ matchResult: matchName, matchPhoto: matchPhoto  });
-    console.log({ matchResult: matchName, matchPhoto: matchPhoto });
-
+    res.json(bestMatch);
+    
   });
-
-
 };
 
 
