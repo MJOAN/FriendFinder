@@ -2,6 +2,8 @@
 
 ### Create a Friend Finder! 
 
+Check out [my demo](http://friend-finder-match.herokuapp.com/) to study the app's basic functionality. This demo is deployed on Heroku!
+
 ![screenshot1.png](screenshot1.png)
 ![screenshot2.png](screenshot2.png)
 ![screenshot3.png](screenshot3.png)
