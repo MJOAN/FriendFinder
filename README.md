@@ -27,7 +27,7 @@ Check out [my demo](http://friend-finder-match.herokuapp.com/) to study the app'
     - server.js
   ```
 
-### Instructions
+### Process
 
 1. Your survey should have 10 questions of your choosing. Each answer should be on a scale of 1 to 5 based on how much the user agrees or disagrees with a question.
 
@@ -59,6 +59,8 @@ Check out [my demo](http://friend-finder-match.herokuapp.com/) to study the app'
 7. Once you've found the current user's most compatible friend, display the result as a modal pop-up.
    * The modal should display both the name and picture of the closest match. 
 
-## Copyright
 
-Coding Boot Camp (C) 2016. All Rights Reserved.
+
+
+##### Copyright
+##### Coding Boot Camp (C) 2016. All Rights Reserved.
