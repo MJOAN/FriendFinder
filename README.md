@@ -1,8 +1,8 @@
-# Friend Finder using Node and Express!
+## Friend Finder using Node and Express!
 
 ### Create a Friend Finder! 
 
-Check out [my demo](http://friend-finder-match.herokuapp.com/) to study the app's basic functionality. This demo is deployed on Heroku!
+Check out [my demo](http://friend-finder-match.herokuapp.com/) to study the app's basic functionality. This demo is deployed on Heroku! Thanks to Coding Boot Camp for boiler plate code! 
 
 ![screenshot1.png](screenshot1.png)
 ![screenshot2.png](screenshot2.png)
